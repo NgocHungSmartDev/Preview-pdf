@@ -1,23 +1,57 @@
 <div class="container-fluid">
     <div class="row content">
-      <div class="col-sm-3 sidenav">
+      <div class="col-sm-12">
         <h4>Upload</h4>
-        <ul class="nav nav-pills nav-stacked">
-          <li class="active"><a href="#section1">Home</a></li>
-          <li><a href="#section2">Friends</a></li>
-          <li><a href="#section3">Family</a></li>
-          <li><a href="#section3">Photos</a></li>
-        </ul><br>
-        <div class="input-group">
-         
-            <input type="file" (change)="onFileSelected($event)" />
-            <button (click)="onUpload()">Upload</button>
-
-
-        </div>
+        <div>
+            <mat-toolbar *ngIf="currentFile" class="progress-bar">
+              <mat-progress-bar color="accent" [value]="progress"></mat-progress-bar>
+              <span class="progress">{{ progress }}%</span>
+            </mat-toolbar>
+          
+            <mat-form-field>
+              <div>
+                <mat-toolbar>
+                  <input matInput [value]="fileName" />
+          
+                  <button
+                    mat-flat-button
+                    color="primary"
+                    [disabled]="!currentFile"
+                    (click)="upload()"
+                  >
+                    Upload
+                  </button>
+                </mat-toolbar>
+          
+                <input
+                  type="file"
+                  id="fileInput"
+                  (change)="selectFile($event)"
+                  name="fileInput"
+                />
+              </div>
+            </mat-form-field>
+          </div>
+          
+          <div *ngIf="message" class="message">
+            {{ message }}
+          </div>
+          
+          <mat-card class="example-card">
+            <mat-card-header>
+              <mat-card-title>List of Files</mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+              <mat-list role="list">
+                <mat-list-item role="listitem" *ngFor="let file of fileInfos | async">
+                  <a href="{{ file.url }}">{{ file.name }}</a>
+                </mat-list-item>
+              </mat-list>
+            </mat-card-content>
+          </mat-card>
       </div>
   
-      <div class="col-sm-9">
+      <div class="col-sm-12">
         <h4><small>PDF</small></h4>
         <hr>
         <ngx-extended-pdf-viewer
