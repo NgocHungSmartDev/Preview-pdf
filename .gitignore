@@ -1,2 +1,8 @@
 /PreviewPdf/*.cmd
 /PreviewPdf/*.md
+/PreviewPdf/*.gitignore
+/PreviewPdf/*.project
+/PreviewPdf/*.classpath
+/PreviewPdf/*.factorypath
+/PreviewPdf/.settings
+/PreviewPdf/target
