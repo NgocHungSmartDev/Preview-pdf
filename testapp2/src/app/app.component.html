@@ -1,0 +1,8 @@
+<div class="pdf-container">
+  <canvas id="pdf-canvas"></canvas>
+</div>
+<div class="pdf-controls">
+  <button (click)="prevPage()" [disabled]="currentPage <= 1">Prev</button>
+  <span>{{ currentPage }} / {{ numPages }}</span>
+  <button (click)="nextPage()" [disabled]="currentPage >= numPages">Next</button>
+</div>
